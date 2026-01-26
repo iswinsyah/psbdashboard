@@ -1,0 +1,126 @@
+:root {
+    --color-primary: #4FB7B3;
+    --color-secondary: #26667F;
+    --color-bg: #FFFFFF;
+    --btn-main: #3674B5;
+    --btn-second: #F93827;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6f9; /* Sedikit abu-abu agar konten putih menonjol */
+    overflow-x: hidden;
+}
+
+/* --- SIDEBAR --- */
+#wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: 250px;
+    margin-left: 0;
+    background-color: var(--color-secondary); /* Warna Kedua sebagai background sidebar */
+    color: #fff;
+    transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 1.5rem 1.25rem;
+    font-size: 1.2rem;
+    background-color: rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+#sidebar-wrapper .list-group {
+    width: 250px;
+}
+
+#sidebar-wrapper .list-group-item {
+    background-color: transparent;
+    color: rgba(255,255,255,0.8);
+    border: none;
+    padding: 15px 25px;
+    font-size: 0.95rem;
+}
+
+#sidebar-wrapper .list-group-item:hover {
+    background-color: var(--color-primary); /* Warna Utama saat hover */
+    color: #fff;
+    cursor: pointer;
+}
+
+#sidebar-wrapper .list-group-item.active {
+    background-color: var(--color-primary);
+    color: #fff;
+    font-weight: 600;
+    border-left: 4px solid #fff;
+}
+
+/* --- CONTENT --- */
+#page-content-wrapper {
+    width: 100%;
+}
+
+.navbar {
+    background-color: var(--color-bg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.btn-custom-main {
+    background-color: var(--btn-main);
+    color: #fff;
+    border: none;
+}
+.btn-custom-main:hover {
+    background-color: #2a5d94;
+    color: #fff;
+}
+
+.btn-custom-second {
+    background-color: var(--btn-second);
+    color: #fff;
+    border: none;
+}
+.btn-custom-second:hover {
+    background-color: #d62c1d;
+    color: #fff;
+}
+
+/* Kartu Statistik */
+.card-stat {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+.card-stat:hover {
+    transform: translateY(-5px);
+}
+.icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+/* Responsive Toggling */
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: -250px;
+}
+
+@media (max-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: -250px;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: 0;
+    }
+}
