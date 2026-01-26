@@ -199,3 +199,20 @@ body {
 #warm-market { width: 80%; background-color: #4FB7B3; }
 #hot-market { width: 60%; background-color: #ffc107; }
 #very-hot-market { width: 40%; background-color: #F93827; }
+
+/* --- LANDING PAGE STYLES --- */
+.landing-hero {
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+    color: white;
+    padding: 80px 0 120px; /* Padding bawah besar untuk space kartu */
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    text-align: center;
+}
+.landing-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    padding: 40px;
+    margin-top: -80px; /* Efek kartu menumpuk ke atas */
+}
