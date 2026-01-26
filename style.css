@@ -124,3 +124,48 @@ body {
         margin-left: 0;
     }
 }
+
+/* --- KANBAN BOARD STYLES --- */
+.kanban-container {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    gap: 20px;
+}
+.kanban-column {
+    min-width: 300px;
+    width: 300px;
+    background-color: #eef2f5;
+    border-radius: 8px;
+    padding: 15px;
+    height: fit-content;
+}
+.kanban-header {
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-secondary);
+}
+.kanban-card {
+    background: white;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-left: 4px solid transparent;
+    cursor: grab;
+    transition: transform 0.2s;
+}
+.kanban-card:hover { transform: translateY(-3px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+
+/* Warna Border Card berdasarkan Prioritas/Status */
+.card-hot { border-left-color: var(--btn-second); }
+.card-warm { border-left-color: #ffc107; }
+.card-cold { border-left-color: #6c757d; }
+.card-done { border-left-color: #198754; }
+
+.kanban-card h6 { font-weight: 600; margin-bottom: 5px; color: #333; }
+.kanban-card p { font-size: 0.85rem; color: #666; margin-bottom: 8px; }
+.kanban-meta { font-size: 0.75rem; color: #999; display: flex; justify-content: space-between; align-items: center; }

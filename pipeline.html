@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipeline Santri - PSB Villa Quran Baron</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                <img src="https://srv1981-files.hstgr.io/9cfcf09b529fd104/files/public_html/sadigs/assets/img/logo.png" 
+                     alt="Logo Sadigs" 
+                     style="max-width: 80%; height: auto; margin-bottom: 10px;"
+                     onerror="this.style.display='none'; this.parentElement.innerText='VILLA QURAN BARON'">
+            </div>
+            <div class="list-group list-group-flush mt-3">
+                <a href="index.html" class="list-group-item list-group-item-action">
+                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                </a>
+                <a href="pipeline.html" class="list-group-item list-group-item-action active">
+                    <i class="fas fa-filter me-2"></i> Pipeline Santri
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-calendar-alt me-2"></i> Manajemen Event
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-users me-2"></i> Data Mitra
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-money-bill-wave me-2"></i> Keuangan
+                </a>
+                <div class="border-top my-3 border-secondary"></div>
+                <a href="target.html" class="list-group-item list-group-item-action text-warning">
+                    <i class="fas fa-bullseye me-2"></i> Setting Target
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                </a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-custom-main" id="menu-toggle"><i class="fas fa-bars"></i></button>
+                    <div class="ms-auto fw-bold">Pipeline Santri</div>
+                </div>
+            </nav>
+
+            <div class="container-fluid px-4 py-4">
+                
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="fw-bold text-secondary">Funneling Process</h4>
+                    <button class="btn btn-custom-main"><i class="fas fa-plus me-1"></i> Tambah Prospek</button>
+                </div>
+
+                <!-- KANBAN BOARD AREA -->
+                <div class="kanban-container">
+                    
+                    <!-- KOLOM 1: AWARENESS / LEADS -->
+                    <div class="kanban-column">
+                        <div class="kanban-header">
+                            <span><i class="fas fa-bullhorn me-2 text-info"></i> Awareness (Leads)</span>
+                            <span class="badge bg-secondary rounded-pill">3</span>
+                        </div>
+                        
+                        <!-- Card Item -->
+                        <div class="kanban-card card-cold">
+                            <h6>Ibu Rina (Walisantri)</h6>
+                            <p><i class="fab fa-whatsapp text-success"></i> Tanya biaya masuk via WA</p>
+                            <div class="kanban-meta">
+                                <span><i class="fas fa-user-tag"></i> Mitra A</span>
+                                <span>Baru saja</span>
+                            </div>
+                        </div>
+
+                        <div class="kanban-card card-cold">
+                            <h6>Pak Budi</h6>
+                            <p>Isi form dari Facebook Ads</p>
+                            <div class="kanban-meta">
+                                <span><i class="fas fa-globe"></i> FB Ads</span>
+                                <span>1 jam lalu</span>
+                            </div>
+                        </div>
+
+                        <div class="kanban-card card-cold">
+                            <h6>Ibu Susi</h6>
+                            <p>Dapat brosur dari pameran</p>
+                            <div class="kanban-meta">
+                                <span><i class="fas fa-users"></i> Offline</span>
+                                <span>Kemarin</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KOLOM 2: INTEREST (Undang Event) -->
+                    <div class="kanban-column">
+                        <div class="kanban-header">
+                            <span><i class="fas fa-calendar-check me-2 text-warning"></i> Interest (Event)</span>
+                            <span class="badge bg-secondary rounded-pill">2</span>
+                        </div>
+
+                        <div class="kanban-card card-warm">
+                            <h6>Keluarga Pak Andi</h6>
+                            <p>Sudah daftar Webinar Parenting Sabtu ini</p>
+                            <div class="kanban-meta">
+                                <span><i class="fas fa-video"></i> Zoom</span>
+                                <span class="text-warning">H-2 Event</span>
+                            </div>
+                        </div>
+
+                        <div class="kanban-card card-warm">
+                            <h6>Ibu Dewi</h6>
+                            <p>Janji datang Open House besok</p>
+                            <div class="kanban-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Lokasi</span>
+                                <span class="text-danger">Besok</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KOLOM 3: DESIRE (Follow Up Intens) -->
+                    <div class="kanban-column">
+                        <div class="kanban-header">
+                            <span><i class="fas fa-heart me-2 text-danger"></i> Desire (Hot)</span>
+                            <span class="badge bg-secondary rounded-pill">1</span>
+                        </div>
+
+                        <div class="kanban-card card-hot">
+                            <h6>Bapak Hartono</h6>
+                            <p>Anak antusias setelah ikut tes, ortu nego biaya pangkal</p>
+                            <div class="kanban-meta">
+                                <span><i class="fas fa-phone"></i> Call Sore ini</span>
+                                <span class="badge bg-danger">Prioritas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KOLOM 4: ACTION (Closing) -->
+                    <div class="kanban-column">
+                        <div class="kanban-header">
+                            <span><i class="fas fa-check-circle me-2 text-success"></i> Action (Closing)</span>
+                            <span class="badge bg-secondary rounded-pill">1</span>
+                        </div>
+
+                        <div class="kanban-card card-done">
+                            <h6>Ananda Rizky</h6>
+                            <p>Sudah transfer uang pangkal. Menunggu ukuran seragam.</p>
+                            <div class="kanban-meta">
+                                <span><i class="fas fa-file-invoice-dollar"></i> Lunas</span>
+                                <span class="text-success">Selesai</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END KANBAN -->
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var el = document.getElementById("wrapper");
+        var toggleButton = document.getElementById("menu-toggle");
+        toggleButton.onclick = function () { el.classList.toggle("toggled"); };
+    </script>
+</body>
+</html>
