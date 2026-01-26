@@ -111,7 +111,7 @@ body {
     color: white;
 }
 
-/* Responsive Toggling */
+/* Responsive Toggling 
 #wrapper.toggled #sidebar-wrapper {
     margin-left: -250px;
 }
@@ -124,6 +124,7 @@ body {
         margin-left: 0;
     }
 }
+*/
 
 /* --- KANBAN BOARD STYLES --- */
 .kanban-container {
