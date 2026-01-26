@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard PSB - Villa Quran Baron</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome untuk Ikon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts (Opsional, pakai Poppins agar modern) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-primary: #4FB7B3;
+            --color-secondary: #26667F;
+            --color-bg: #FFFFFF;
+            --btn-main: #3674B5;
+            --btn-second: #F93827;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f6f9; /* Sedikit abu-abu agar konten putih menonjol */
+            overflow-x: hidden;
+        }
+
+        /* --- SIDEBAR --- */
+        #wrapper {
+            display: flex;
+            width: 100%;
+            align-items: stretch;
+        }
+
+        #sidebar-wrapper {
+            min-height: 100vh;
+            width: 250px;
+            margin-left: 0;
+            background-color: var(--color-secondary); /* Warna Kedua sebagai background sidebar */
+            color: #fff;
+            transition: margin 0.25s ease-out;
+        }
+
+        #sidebar-wrapper .sidebar-heading {
+            padding: 1.5rem 1.25rem;
+            font-size: 1.2rem;
+            background-color: rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        #sidebar-wrapper .list-group {
+            width: 250px;
+        }
+
+        #sidebar-wrapper .list-group-item {
+            background-color: transparent;
+            color: rgba(255,255,255,0.8);
+            border: none;
+            padding: 15px 25px;
+            font-size: 0.95rem;
+        }
+
+        #sidebar-wrapper .list-group-item:hover {
+            background-color: var(--color-primary); /* Warna Utama saat hover */
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #sidebar-wrapper .list-group-item.active {
+            background-color: var(--color-primary);
+            color: #fff;
+            font-weight: 600;
+            border-left: 4px solid #fff;
+        }
+
+        /* --- CONTENT --- */
+        #page-content-wrapper {
+            width: 100%;
+        }
+
+        .navbar {
+            background-color: var(--color-bg);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .btn-custom-main {
+            background-color: var(--btn-main);
+            color: #fff;
+            border: none;
+        }
+        .btn-custom-main:hover {
+            background-color: #2a5d94;
+            color: #fff;
+        }
+
+        .btn-custom-second {
+            background-color: var(--btn-second);
+            color: #fff;
+            border: none;
+        }
+        .btn-custom-second:hover {
+            background-color: #d62c1d;
+            color: #fff;
+        }
+
+        /* Kartu Statistik */
+        .card-stat {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .card-stat:hover {
+            transform: translateY(-5px);
+        }
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        /* Responsive Toggling */
+        #wrapper.toggled #sidebar-wrapper {
+            margin-left: -250px;
+        }
+
+        @media (max-width: 768px) {
+            #sidebar-wrapper {
+                margin-left: -250px;
+            }
+            #wrapper.toggled #sidebar-wrapper {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                <!-- LOGO -->
+                <!-- Pastikan nama file logo benar, misal logo.png atau logo_sekolah.png -->
+                <img src="https://srv1981-files.hstgr.io/9cfcf09b529fd104/files/public_html/sadigs/assets/img/logo.png" 
+                     alt="Logo Sadigs" 
+                     style="max-width: 80%; height: auto; margin-bottom: 10px;"
+                     onerror="this.style.display='none'; this.parentElement.innerText='VILLA QURAN BARON'">
+            </div>
+            <div class="list-group list-group-flush mt-3">
+                <a href="#" class="list-group-item list-group-item-action active">
+                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-filter me-2"></i> Pipeline Santri
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-calendar-alt me-2"></i> Manajemen Event
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-users me-2"></i> Data Mitra
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-money-bill-wave me-2"></i> Keuangan
+                </a>
+                <div class="border-top my-3 border-secondary"></div>
+                <!-- Menu Khusus Ketua Yayasan -->
+                <a href="#" class="list-group-item list-group-item-action text-warning">
+                    <i class="fas fa-bullseye me-2"></i> Setting Target
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+            <!-- Top Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-custom-main" id="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle fw-bold text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                    <img src="https://ui-avatars.com/api/?name=Ketua+Yayasan&background=4FB7B3&color=fff" class="rounded-circle me-2" width="30">
+                                    Ketua Yayasan
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#">Profil</a></li>
+                                    <li><a class="dropdown-item" href="#">Pengaturan</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-danger" href="#">Keluar</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content Area -->
+            <div class="container-fluid px-4 py-4">
+                
+                <!-- Header Halaman -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="fw-bold text-secondary">Dashboard Overview</h2>
+                    <div>
+                        <button class="btn btn-custom-second me-2"><i class="fas fa-download me-1"></i> Laporan PDF</button>
+                        <button class="btn btn-custom-main"><i class="fas fa-plus me-1"></i> Input Leads Baru</button>
+                    </div>
+                </div>
+
+                <!-- Contoh Kartu Statistik (Target vs Realisasi) -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="card card-stat p-3 bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="text-muted mb-1 small text-uppercase fw-bold">Total Leads</p>
+                                    <h3 class="fw-bold mb-0" style="color: var(--color-secondary);">124</h3>
+                                </div>
+                                <div class="icon-box" style="background-color: var(--color-primary);">
+                                    <i class="fas fa-address-book"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <small class="text-success"><i class="fas fa-arrow-up"></i> 12%</small> <small class="text-muted">dari bulan lalu</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card card-stat p-3 bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="text-muted mb-1 small text-uppercase fw-bold">Hadir Event</p>
+                                    <h3 class="fw-bold mb-0" style="color: var(--color-secondary);">45</h3>
+                                </div>
+                                <div class="icon-box bg-warning">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                            <div class="progress mt-3" style="height: 5px;">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small class="text-muted mt-1 d-block">Target: 100 Peserta</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card card-stat p-3 bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="text-muted mb-1 small text-uppercase fw-bold">Closing (Lunas)</p>
+                                    <h3 class="fw-bold mb-0" style="color: var(--color-secondary);">12</h3>
+                                </div>
+                                <div class="icon-box bg-success">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                            <div class="progress mt-3" style="height: 5px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small class="text-muted mt-1 d-block">Target: 60 Siswa</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card card-stat p-3 bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="text-muted mb-1 small text-uppercase fw-bold">Komisi Mitra</p>
+                                    <h4 class="fw-bold mb-0" style="color: var(--color-secondary);">Rp 2.5jt</h4>
+                                </div>
+                                <div class="icon-box" style="background-color: var(--btn-second);">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <small class="text-muted">Siap dicairkan</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Area Konten Utama (Tabel / Grafik) -->
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="mb-0 fw-bold" style="color: var(--color-secondary);">Aktivitas Terbaru</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Nama Calon Santri</th>
+                                        <th>Sumber</th>
+                                        <th>Status</th>
+                                        <th>Tanggal</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Ahmad Fulan</td>
+                                        <td><span class="badge bg-info text-dark">Mitra Sekolah A</span></td>
+                                        <td><span class="badge bg-warning">Interest</span></td>
+                                        <td>26 Jan 2026</td>
+                                        <td><button class="btn btn-sm btn-outline-primary">Detail</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Siti Aminah</td>
+                                        <td><span class="badge bg-success">Referal Walisantri</span></td>
+                                        <td><span class="badge bg-primary">Closing</span></td>
+                                        <td>25 Jan 2026</td>
+                                        <td><button class="btn btn-sm btn-outline-primary">Detail</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script untuk Toggle Sidebar -->
+    <script>
+        var el = document.getElementById("wrapper");
+        var toggleButton = document.getElementById("menu-toggle");
+
+        toggleButton.onclick = function () {
+            el.classList.toggle("toggled");
+        };
+    </script>
+</body>
+</html>
