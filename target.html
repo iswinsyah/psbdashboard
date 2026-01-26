@@ -112,7 +112,7 @@
                                 </div>
 
                                 <div class="col-12 text-end">
-                                    <button type="button" class="btn btn-custom-main px-4 py-2"><i class="fas fa-save me-2"></i> Simpan Target</button>
+                                    <button type="button" id="simpanTargetBtn" class="btn btn-custom-main px-4 py-2"><i class="fas fa-save me-2"></i> Simpan Target</button>
                                 </div>
                             </div>
                         </form>
@@ -129,22 +129,39 @@
         var toggleButton = document.getElementById("menu-toggle");
         toggleButton.onclick = function () { el.classList.toggle("toggled"); };
 
-        // Script Hitung Otomatis
-        const inputs = document.querySelectorAll('.target-input');
-        const displayTotal = document.getElementById('displayTotal');
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('.target-input');
+            const displayTotal = document.getElementById('displayTotal');
+            const simpanBtn = document.getElementById('simpanTargetBtn');
 
-        function hitungTotal() {
-            let total = 0;
+            function hitungTotal() {
+                let total = 0;
+                inputs.forEach(input => {
+                    let val = parseInt(input.value);
+                    if (isNaN(val)) val = 0;
+                    total += val;
+                });
+                displayTotal.innerText = total;
+                return total;
+            }
+
+            // Muat data saat halaman dibuka
+            const savedTotal = localStorage.getItem('totalTargetPSB');
+            if (savedTotal) {
+                displayTotal.innerText = savedTotal;
+                // Note: Untuk mengisi kembali setiap input, perlu logika lebih kompleks
+            }
+
             inputs.forEach(input => {
-                let val = parseInt(input.value);
-                if (isNaN(val)) val = 0;
-                total += val;
+                input.addEventListener('input', hitungTotal);
             });
-            displayTotal.innerText = total;
-        }
 
-        inputs.forEach(input => {
-            input.addEventListener('input', hitungTotal);
+            // Simpan data ke LocalStorage
+            simpanBtn.addEventListener('click', function() {
+                const total = hitungTotal();
+                localStorage.setItem('totalTargetPSB', total);
+                alert('Target berhasil disimpan di browser!');
+            });
         });
     </script>
 </body>

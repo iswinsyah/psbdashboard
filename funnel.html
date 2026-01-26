@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Target Funneling - PSB Villa Quran Baron</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                <img src="https://srv1981-files.hstgr.io/9cfcf09b529fd104/files/public_html/sadigs/assets/img/logo.png" 
+                     alt="Logo Sadigs" 
+                     style="max-width: 80%; height: auto; margin-bottom: 10px;"
+                     onerror="this.style.display='none'; this.parentElement.innerText='VILLA QURAN BARON'">
+            </div>
+            <div class="list-group list-group-flush mt-3">
+                <a href="index.html" class="list-group-item list-group-item-action">
+                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                </a>
+                <a href="funnel.html" class="list-group-item list-group-item-action active">
+                    <i class="fas fa-chart-pie me-2"></i> Target Funnel
+                </a>
+                <a href="pipeline.html" class="list-group-item list-group-item-action">
+                    <i class="fas fa-filter me-2"></i> Pipeline Santri
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-calendar-alt me-2"></i> Manajemen Event
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-users me-2"></i> Data Mitra
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-money-bill-wave me-2"></i> Keuangan
+                </a>
+                <div class="border-top my-3 border-secondary"></div>
+                <a href="target.html" class="list-group-item list-group-item-action text-warning">
+                    <i class="fas fa-bullseye me-2"></i> Setting Target
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                </a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-custom-main" id="menu-toggle"><i class="fas fa-bars"></i></button>
+                    <div class="ms-auto fw-bold">Ilustrasi Target Funneling</div>
+                </div>
+            </nav>
+
+            <div class="container-fluid px-4 py-4">
+                
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="fw-bold text-secondary">Target Marketing Berjenjang</h4>
+                    <p class="text-muted mb-0">Berdasarkan Target Closing: <strong id="baseTargetValue" class="text-dark">0</strong> Santri</p>
+                </div>
+
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-lg-5 p-4">
+                        
+                        <!-- FUNNEL CHART -->
+                        <div class="funnel-container">
+                            <!-- Layer 4: Cold Market -->
+                            <div id="cold-market" class="funnel-layer">
+                                <h5><i class="fas fa-snowflake me-2"></i> Cold Market</h5>
+                                <p id="cold-target">0</p>
+                                <small>Target Kontak oleh Mitra</small>
+                            </div>
+                            <!-- Layer 3: Warm Market -->
+                            <div id="warm-market" class="funnel-layer">
+                                <h5><i class="fas fa-mug-hot me-2"></i> Warm Market</h5>
+                                <p id="warm-target">0</p>
+                                <small>Target Peserta Grup Parenting</small>
+                            </div>
+                            <!-- Layer 2: Hot Market -->
+                            <div id="hot-market" class="funnel-layer">
+                                <h5><i class="fas fa-fire me-2"></i> Hot Market</h5>
+                                <p id="hot-target">0</p>
+                                <small>Target Peserta Open House/Zoominar</small>
+                            </div>
+                            <!-- Layer 1: Very Hot Market -->
+                            <div id="very-hot-market" class="funnel-layer">
+                                <h5><i class="fas fa-heart me-2"></i> Very Hot Market</h5>
+                                <p id="very-hot-target">0</p>
+                                <small>Target Santri Mendaftar (Closing)</small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var el = document.getElementById("wrapper");
+        var toggleButton = document.getElementById("menu-toggle");
+        toggleButton.onclick = function () { el.classList.toggle("toggled"); };
+
+        // --- SCRIPT KALKULASI FUNNEL ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ambil data dari LocalStorage (jika ada) atau gunakan nilai default
+            const baseTarget = parseInt(localStorage.getItem('totalTargetPSB')) || 60; // Default 60 jika tidak ada
+
+            const veryHotTarget = baseTarget;
+            const hotTarget = veryHotTarget * 5;
+            const warmTarget = hotTarget * 5;
+            const coldTarget = warmTarget * 5;
+
+            // Tampilkan angka ke elemen HTML
+            document.getElementById('baseTargetValue').innerText = baseTarget.toLocaleString('id-ID');
+            document.getElementById('very-hot-target').innerText = veryHotTarget.toLocaleString('id-ID');
+            document.getElementById('hot-target').innerText = hotTarget.toLocaleString('id-ID');
+            document.getElementById('warm-target').innerText = warmTarget.toLocaleString('id-ID');
+            document.getElementById('cold-target').innerText = coldTarget.toLocaleString('id-ID');
+        });
+    </script>
+</body>
+</html>
