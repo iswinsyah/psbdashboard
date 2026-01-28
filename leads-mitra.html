@@ -208,13 +208,19 @@
                 link: 'bit.ly/ZoomParentingBaron'
             };
 
+            // Pastikan link ada protokol https:// agar bisa diklik di WA
+            let eventLink = eventData.link;
+            if (eventLink && !eventLink.startsWith('http')) {
+                eventLink = "https://" + eventLink;
+            }
+
             const angle = document.getElementById('followUpAngle').value;
             const greeting = getGreeting();
             
             let template = templates[angle];
             let message = template.replace("{SALAM}", greeting).replace("{NAMA}", currentProspek)
                                   .replace(/{EVENT_NAME}/g, eventData.name).replace(/{EVENT_DATE}/g, eventData.date)
-                                  .replace(/{EVENT_TIME}/g, eventData.time).replace(/{EVENT_LINK}/g, eventData.link);
+                                  .replace(/{EVENT_TIME}/g, eventData.time).replace(/{EVENT_LINK}/g, eventLink);
             message = spinText(message); // Acak kata-kata
 
             document.getElementById('followUpMsg').value = message;
