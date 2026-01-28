@@ -92,7 +92,11 @@
             
             var linkWA = "https://wa.me/" + nomorAdmin + "?text=" + encodeURIComponent(pesan);
             
-            window.location.href = linkWA;
+            // 1. Buka WhatsApp di Tab Baru (agar pesan terkirim ke Admin)
+            window.open(linkWA, '_blank');
+
+            // 2. Redirect halaman ini ke Thank You Page (untuk masuk Grup)
+            window.location.href = 'thankyou.html';
         });
     </script>
 </body>

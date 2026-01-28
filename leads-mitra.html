@@ -93,6 +93,7 @@
                                         <th>Nama Prospek</th>
                                         <th>Sumber</th>
                                         <th>Status Admin</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -101,18 +102,21 @@
                                         <td class="fw-bold">Ibu Rina</td>
                                         <td><span class="badge bg-primary">Ebook</span></td>
                                         <td><span class="badge bg-secondary">Baru Masuk</span></td>
+                                        <td><button class="btn btn-sm btn-success" onclick="openFollowUp('Ibu Rina')"><i class="fab fa-whatsapp"></i> Follow Up</button></td>
                                     </tr>
                                     <tr>
                                         <td>27 Jan 2026</td>
                                         <td class="fw-bold">Pak Budi</td>
                                         <td><span class="badge bg-warning text-dark">Tes Hafidz</span></td>
                                         <td><span class="badge bg-info text-dark">Sedang Follow Up</span></td>
+                                        <td><button class="btn btn-sm btn-success" onclick="openFollowUp('Pak Budi')"><i class="fab fa-whatsapp"></i> Follow Up</button></td>
                                     </tr>
                                     <tr>
                                         <td>25 Jan 2026</td>
                                         <td class="fw-bold">Keluarga Pak Andi</td>
                                         <td><span class="badge bg-primary">Ebook</span></td>
                                         <td><span class="badge bg-success">Closing (Lunas)</span></td>
+                                        <td><button class="btn btn-sm btn-secondary" disabled>Selesai</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -128,6 +132,84 @@
         </div>
     </div>
 
+    <!-- Modal Generator Pesan Follow Up -->
+    <div class="modal fade" id="followUpModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">Follow Up: <span id="modalProspekName" class="text-primary"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info small py-2 mb-3">
+                        <i class="fas fa-info-circle me-1"></i> Ajak mereka masuk ke Zoominar agar lebih yakin mendaftar.
+                    </div>
+
+                    <label class="small fw-bold text-secondary mb-2">Pilih Jenis Pesan</label>
+                    <select class="form-select form-select-sm mb-3" id="followUpAngle" onchange="generateFollowUp()">
+                        <option value="invite">1. Undangan Awal (Baru Gabung)</option>
+                        <option value="reminder">2. Reminder H-1 (Besok Acara)</option>
+                        <option value="link">3. Share Link Zoom (Hari H)</option>
+                    </select>
+                    
+                    <label class="small fw-bold text-secondary mb-2">Preview Pesan</label>
+                    <textarea class="form-control mb-3 text-muted bg-light" id="followUpMsg" rows="6" style="font-size: 0.9rem;" readonly></textarea>
+                    
+                    <button class="btn btn-success w-100 fw-bold" onclick="sendFollowUp()">
+                        <i class="fab fa-whatsapp me-2"></i> KIRIM KE WHATSAPP
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentProspek = "";
+
+        function getGreeting() {
+            const hour = new Date().getHours();
+            if (hour < 10) return "Selamat Pagi";
+            if (hour < 15) return "Selamat Siang";
+            if (hour < 18) return "Selamat Sore";
+            return "Selamat Malam";
+        }
+
+        const templates = {
+            invite: "{SALAM} {NAMA}. Terima kasih sudah download Ebook/Ikut Tes kemarin ya. 😊 Sekadar info, kami ada *Zoominar Parenting Gratis* minggu ini. Materinya bagus banget buat melengkapi Ebook kemarin. Mau saya kirimkan infonya?",
+            reminder: "{SALAM} {NAMA}. Mengingatkan besok pagi jam 09.00 WIB kita ada Zoominar Parenting ya. Pastikan alarmnya dipasang biar nggak ketinggalan materi dagingnya! ⏰",
+            link: "{SALAM} {NAMA}. Acaranya sebentar lagi mulai ya! 🚀 Ini link Zoom-nya: bit.ly/ZoomParentingBaron. Ditunggu kehadirannya ya Bun/Pak!"
+        };
+
+        function openFollowUp(name) {
+            currentProspek = name;
+            document.getElementById('modalProspekName').innerText = name;
+            document.getElementById('followUpAngle').value = 'invite'; // Default
+            generateFollowUp();
+            
+            var myModal = new bootstrap.Modal(document.getElementById('followUpModal'));
+            myModal.show();
+        }
+
+        function generateFollowUp() {
+            const angle = document.getElementById('followUpAngle').value;
+            const greeting = getGreeting();
+            
+            let template = templates[angle];
+            let message = template.replace("{SALAM}", greeting).replace("{NAMA}", currentProspek);
+            
+            document.getElementById('followUpMsg').value = message;
+        }
+
+        function sendFollowUp() {
+            var msgText = document.getElementById('followUpMsg').value;
+            var encodedMsg = encodeURIComponent(msgText);
+            // Di sistem real, kita akan ambil nomor WA dari database berdasarkan nama prospek
+            // Untuk prototype ini, kita buka WA umum
+            var waUrl = "https://wa.me/?text=" + encodedMsg; 
+            
+            window.open(waUrl, '_blank');
+        }
+    </script>
 </body>
 </html>
