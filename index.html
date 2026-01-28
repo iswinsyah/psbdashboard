@@ -210,38 +210,10 @@
                 <!-- Area Konten Utama (Tabel / Grafik) -->
                 <div class="card border-0 shadow-sm">
                     <div class="card-header bg-white py-3">
-                        <h5 class="mb-0 fw-bold" style="color: var(--color-secondary);">Aktivitas Terbaru</h5>
+                        <h5 class="mb-0 fw-bold" style="color: var(--color-secondary);">Grafik Akumulasi Leads Mitra</h5>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>Nama Calon Santri</th>
-                                        <th>Sumber</th>
-                                        <th>Status</th>
-                                        <th>Tanggal</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Ahmad Fulan</td>
-                                        <td><span class="badge bg-info text-dark">Mitra Sekolah A</span></td>
-                                        <td><span class="badge bg-warning">Interest</span></td>
-                                        <td>26 Jan 2026</td>
-                                        <td><button class="btn btn-sm btn-outline-primary">Detail</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Siti Aminah</td>
-                                        <td><span class="badge bg-success">Referal Walisantri</span></td>
-                                        <td><span class="badge bg-primary">Closing</span></td>
-                                        <td>25 Jan 2026</td>
-                                        <td><button class="btn btn-sm btn-outline-primary">Detail</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <canvas id="leadsChart" style="width: 100%; height: 300px;"></canvas>
                     </div>
                 </div>
 
@@ -254,6 +226,8 @@
 
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Script untuk Toggle Sidebar -->
     <script>
@@ -263,6 +237,45 @@
         toggleButton.onclick = function () {
             el.classList.toggle("toggled");
         };
+
+        // Inisialisasi Grafik Leads
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx = document.getElementById('leadsChart').getContext('2d');
+            var leadsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Baru Masuk', 'Sudah Masuk Grup', 'Followup', 'Bersedia Hadir', 'Hadir', 'Minat Daftar', 'Daftar'],
+                    datasets: [{
+                        label: 'Jumlah Prospek',
+                        data: [120, 95, 60, 45, 30, 20, 12], // Data Dummy Akumulasi
+                        backgroundColor: [
+                            '#6c757d', // Baru Masuk (Secondary)
+                            '#0dcaf0', // Sudah Masuk Grup (Info)
+                            '#0dcaf0', // Followup (Info)
+                            '#ffc107', // Bersedia Hadir (Warning)
+                            '#ffc107', // Hadir (Warning)
+                            '#198754', // Minat Daftar (Success)
+                            '#198754'  // Daftar (Success)
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>
