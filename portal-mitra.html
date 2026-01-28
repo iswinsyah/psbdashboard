@@ -60,32 +60,38 @@
                 <!-- Campaign 1: Ebook -->
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body p-4">
-                        <div class="row align-items-center">
-                            <div class="col-md-2 text-center">
-                                <div class="bg-light rounded p-3 text-primary">
-                                    <i class="fas fa-book-open fa-3x"></i>
+                        <div class="row">
+                            <!-- Kolom Kiri: Info & Link -->
+                            <div class="col-md-7 mb-3 mb-md-0">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-light rounded p-3 text-primary me-3">
+                                        <i class="fas fa-book-open fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="fw-bold mb-1">Ebook Parenting Gratis</h5>
+                                        <p class="text-muted small mb-0">Lead Magnet untuk menarik orang tua muda. Cocok untuk Grup WA TK/PAUD.</p>
+                                    </div>
+                                </div>
+                                
+                                <label class="small fw-bold text-secondary mb-1">Link Referral Anda</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control" id="linkEbook" value="psbdashboard.villaquranbaronmalang.com/landing-ebook.html?ref=628123456789" readonly>
+                                    <button class="btn btn-outline-secondary" onclick="copyToClipboard('linkEbook')"><i class="fas fa-copy"></i></button>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <h5 class="fw-bold">Ebook Parenting Gratis</h5>
-                                <p class="text-muted small mb-2">Lead Magnet untuk menarik orang tua muda. Sangat cocok disebar di Grup WA TK/PAUD.</p>
-                                <div class="input-group input-group-sm mb-2">
-                                    <span class="input-group-text bg-light">Link Anda</span>
-                                    <input type="text" class="form-control" value="psbdashboard.villaquranbaronmalang.com/landing-ebook.html?ref=628123456789" readonly>
-                                    <button class="btn btn-outline-secondary" onclick="alert('Link berhasil disalin!')"><i class="fas fa-copy"></i></button>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="d-grid gap-2">
-                                    <button class="btn btn-success btn-sm" onclick="trackShare('WA')">
-                                        <i class="fab fa-whatsapp me-2"></i> Share ke WhatsApp
-                                    </button>
-                                    <button class="btn btn-primary btn-sm" onclick="trackShare('FB')">
-                                        <i class="fab fa-facebook me-2"></i> Share ke Facebook
-                                    </button>
-                                    <button class="btn btn-dark btn-sm" onclick="trackShare('Tiktok')">
-                                        <i class="fab fa-tiktok me-2"></i> Share ke TikTok
-                                    </button>
+
+                            <!-- Kolom Kanan: Generator Pesan -->
+                            <div class="col-md-5 border-start">
+                                <h6 class="fw-bold text-secondary small mb-2"><i class="fas fa-magic me-1"></i> Generator Pesan Otomatis</h6>
+                                <select class="form-select form-select-sm mb-2" id="angleEbook" onchange="generateMessage('ebook')">
+                                    <option value="soft">Soft Selling (Emosional - Grup Keluarga)</option>
+                                    <option value="medium">Medium Selling (Manfaat - Teman Kantor)</option>
+                                    <option value="hard">Hard Selling (To The Point - Status WA)</option>
+                                </select>
+                                <textarea class="form-control form-control-sm mb-2 text-muted bg-light" id="msgEbook" rows="5" style="font-size: 0.8rem;" readonly></textarea>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-success btn-sm flex-grow-1" onclick="shareToWA('ebook')"><i class="fab fa-whatsapp me-1"></i> Share WA</button>
+                                    <button class="btn btn-outline-secondary btn-sm" onclick="copyMsg('ebook')"><i class="fas fa-copy"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -95,29 +101,38 @@
                 <!-- Campaign 2: Tes Hafidz -->
                 <div class="card border-0 shadow-sm">
                     <div class="card-body p-4">
-                        <div class="row align-items-center">
-                            <div class="col-md-2 text-center">
-                                <div class="bg-light rounded p-3 text-warning">
-                                    <i class="fas fa-star fa-3x"></i>
+                        <div class="row">
+                            <!-- Kolom Kiri -->
+                            <div class="col-md-7 mb-3 mb-md-0">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-light rounded p-3 text-warning me-3">
+                                        <i class="fas fa-star fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="fw-bold mb-1">Tes Potensi Hafidz</h5>
+                                        <p class="text-muted small mb-0">Tools interaktif untuk cek potensi anak. Viral dan mudah dibagikan.</p>
+                                    </div>
+                                </div>
+
+                                <label class="small fw-bold text-secondary mb-1">Link Referral Anda</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control" id="linkTest" value="psbdashboard.villaquranbaronmalang.com/landing-test.html?ref=628123456789" readonly>
+                                    <button class="btn btn-outline-secondary" onclick="copyToClipboard('linkTest')"><i class="fas fa-copy"></i></button>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <h5 class="fw-bold">Tes Potensi Hafidz</h5>
-                                <p class="text-muted small mb-2">Tools interaktif untuk cek potensi anak. Viral dan mudah dibagikan.</p>
-                                <div class="input-group input-group-sm mb-2">
-                                    <span class="input-group-text bg-light">Link Anda</span>
-                                    <input type="text" class="form-control" value="psbdashboard.villaquranbaronmalang.com/landing-test.html?ref=628123456789" readonly>
-                                    <button class="btn btn-outline-secondary" onclick="alert('Link berhasil disalin!')"><i class="fas fa-copy"></i></button>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="d-grid gap-2">
-                                    <button class="btn btn-success btn-sm" onclick="trackShare('WA')">
-                                        <i class="fab fa-whatsapp me-2"></i> Share ke WhatsApp
-                                    </button>
-                                    <button class="btn btn-primary btn-sm" onclick="trackShare('FB')">
-                                        <i class="fab fa-facebook me-2"></i> Share ke Facebook
-                                    </button>
+
+                            <!-- Kolom Kanan -->
+                            <div class="col-md-5 border-start">
+                                <h6 class="fw-bold text-secondary small mb-2"><i class="fas fa-magic me-1"></i> Generator Pesan Otomatis</h6>
+                                <select class="form-select form-select-sm mb-2" id="angleTest" onchange="generateMessage('test')">
+                                    <option value="soft">Soft Selling (Emosional - Grup Keluarga)</option>
+                                    <option value="medium">Medium Selling (Manfaat - Teman Kantor)</option>
+                                    <option value="hard">Hard Selling (To The Point - Status WA)</option>
+                                </select>
+                                <textarea class="form-control form-control-sm mb-2 text-muted bg-light" id="msgTest" rows="5" style="font-size: 0.8rem;" readonly></textarea>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-success btn-sm flex-grow-1" onclick="shareToWA('test')"><i class="fab fa-whatsapp me-1"></i> Share WA</button>
+                                    <button class="btn btn-outline-secondary btn-sm" onclick="copyMsg('test')"><i class="fas fa-copy"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -130,10 +145,84 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function trackShare(platform) {
-            // Di sini nanti kita panggil API untuk simpan data ke database
-            alert('Membuka aplikasi ' + platform + '...\n(Sistem mencatat +1 Share untuk Anda)');
+        // --- LOGIKA GENERATOR PESAN ---
+        
+        function getGreeting() {
+            const hour = new Date().getHours();
+            if (hour < 10) return "Selamat Pagi";
+            if (hour < 15) return "Selamat Siang";
+            if (hour < 18) return "Selamat Sore";
+            return "Selamat Malam";
         }
+
+        const templates = {
+            ebook: {
+                soft: "{SALAM} Bunda, ngerasa gak sih anak jaman sekarang susah banget lepas dari HP? 😢 Kadang khawatir ya dampaknya ke otak mereka. Kebetulan saya nemu Ebook bagus nih tentang 'Mendidik Anak Era Digital'. Isinya daging banget dan GRATIS. Coba download di sini ya: {LINK}",
+                medium: "{SALAM} teman-teman. Sharing info bermanfaat. Buat yang punya anak usia SD/SMP, Villa Quran Baron lagi bagi-bagi panduan gratis cara memfilter konten negatif di internet. Bagus buat nambah wawasan kita sebagai ortu. Silakan ambil disini: {LINK}",
+                hard: "Ebook Parenting Gratis! 📚 Cara jitu atasi kecanduan gadget pada anak. Download sekarang sebelum link ditutup: {LINK}"
+            },
+            test: {
+                soft: "{SALAM} Ayah Bunda, penasaran gak sih apakah Ananda punya bakat jadi Hafidz Quran? 🕌 Kadang kita bingung mulai dari mana. Nah, ada Tes Online Gratis nih buat ngecek potensinya. Cuma 5 menit kok. Yuk coba tes di sini: {LINK}",
+                medium: "{SALAM}. Info menarik buat orang tua. Villa Quran Baron menyediakan alat tes potensi Hafidz secara online. Hasilnya bisa jadi gambaran buat kita mengarahkan pendidikan anak. Gratis lho. Cek disini: {LINK}",
+                hard: "Tes Potensi Hafidz GRATIS! 🌟 Ketahui peluang anak Anda menjadi penghafal Quran sejak dini. Hasil langsung keluar via WA. Klik link ini: {LINK}"
+            }
+        };
+
+        function generateMessage(type) {
+            const angle = document.getElementById(type === 'ebook' ? 'angleEbook' : 'angleTest').value;
+            const linkInput = document.getElementById(type === 'ebook' ? 'linkEbook' : 'linkTest').value;
+            const fullLink = "https://" + linkInput; // Pastikan ada protokol agar bisa diklik
+            const greeting = getGreeting();
+
+            let template = templates[type][angle];
+            
+            // Replace placeholder
+            let message = template.replace("{SALAM}", greeting).replace("{LINK}", fullLink);
+            
+            // Set ke textarea
+            document.getElementById(type === 'ebook' ? 'msgEbook' : 'msgTest').value = message;
+        }
+
+        // --- FUNGSI UTILITY ---
+
+        function copyToClipboard(elementId) {
+            var copyText = document.getElementById(elementId);
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // Untuk mobile
+            navigator.clipboard.writeText(copyText.value);
+            alert("Link berhasil disalin!");
+        }
+
+        function copyMsg(type) {
+            var msgText = document.getElementById(type === 'ebook' ? 'msgEbook' : 'msgTest');
+            msgText.select();
+            msgText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(msgText.value);
+            alert("Pesan berhasil disalin!");
+        }
+
+        function shareToWA(type) {
+            var msgText = document.getElementById(type === 'ebook' ? 'msgEbook' : 'msgTest').value;
+            if (!msgText) {
+                generateMessage(type); // Generate dulu kalau kosong
+                msgText = document.getElementById(type === 'ebook' ? 'msgEbook' : 'msgTest').value;
+            }
+            
+            // Encode pesan untuk URL
+            var encodedMsg = encodeURIComponent(msgText);
+            var waUrl = "https://wa.me/?text=" + encodedMsg;
+            
+            // Simulasi tracking share (bisa dikembangkan ke database nanti)
+            console.log("Tracking Share: +1 Poin untuk Mitra");
+            
+            window.open(waUrl, '_blank');
+        }
+
+        // Generate pesan default saat halaman dimuat
+        window.onload = function() {
+            generateMessage('ebook');
+            generateMessage('test');
+        };
     </script>
 </body>
 </html>
