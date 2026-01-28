@@ -102,7 +102,7 @@
                                         <th>Tanggal</th>
                                         <th>Nama Prospek</th>
                                         <th>Sumber</th>
-                                        <th>Status Admin</th>
+                                        <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -122,7 +122,10 @@
                                                 <option>Daftar</option>
                                             </select>
                                         </td>
-                                        <td><button class="btn btn-sm btn-success" onclick="openFollowUp('Ibu Rina')"><i class="fab fa-whatsapp"></i> Follow Up</button></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-success" onclick="openFollowUp('Ibu Rina')"><i class="fab fa-whatsapp"></i> Follow Up</button>
+                                            <button class="btn btn-sm btn-danger ms-1" onclick="deleteRow(this)" title="Hapus Data"><i class="fas fa-trash"></i></button>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>27 Jan 2026</td>
@@ -139,21 +142,37 @@
                                                 <option>Daftar</option>
                                             </select>
                                         </td>
-                                        <td><button class="btn btn-sm btn-success" onclick="openFollowUp('Pak Budi')"><i class="fab fa-whatsapp"></i> Follow Up</button></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-success" onclick="openFollowUp('Pak Budi')"><i class="fab fa-whatsapp"></i> Follow Up</button>
+                                            <button class="btn btn-sm btn-danger ms-1" onclick="deleteRow(this)" title="Hapus Data"><i class="fas fa-trash"></i></button>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>25 Jan 2026</td>
                                         <td class="fw-bold">Keluarga Pak Andi</td>
                                         <td><span class="badge bg-primary fw-normal">Ebook</span></td>
-                                        <td><span class="badge bg-success">Closing (Lunas)</span></td>
-                                        <td><button class="btn btn-sm btn-secondary" disabled>Selesai</button></td>
+                                        <td>
+                                            <select class="form-select form-select-sm status-dropdown" onchange="updateStatusColor(this)">
+                                                <option>Baru Masuk</option>
+                                                <option>Sudah masuk grup</option>
+                                                <option>Followup</option>
+                                                <option>Bersedia hadir</option>
+                                                <option>Hadir</option>
+                                                <option>Minat Daftar</option>
+                                                <option selected>Daftar</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-secondary" disabled>Selesai</button>
+                                            <button class="btn btn-sm btn-danger ms-1" onclick="deleteRow(this)" title="Hapus Data"><i class="fas fa-trash"></i></button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="alert alert-light mt-3 mb-0 small">
                             <i class="fas fa-info-circle me-1"></i> 
-                            Data ini sinkron dengan database Admin. Jika status berubah menjadi <strong>Closing</strong>, komisi akan otomatis masuk ke dompet Anda.
+                            Data ini sinkron dengan database Admin. Jika status berubah menjadi <strong>Daftar</strong>, komisi akan otomatis masuk ke dompet Anda.
                         </div>
                     </div>
                 </div>
@@ -279,6 +298,14 @@
                 selectElement.classList.add('bg-warning', 'text-dark');
             } else if (value === 'Minat Daftar' || value === 'Daftar') {
                 selectElement.classList.add('bg-success');
+            }
+        }
+
+        function deleteRow(btn) {
+            if (confirm('Apakah Anda yakin ingin menghapus data prospek ini? Data yang dihapus tidak bisa dikembalikan.')) {
+                var row = btn.closest('tr');
+                row.remove();
+                // Di sistem real, di sini kita akan panggil API untuk hapus data di database
             }
         }
 
