@@ -14,6 +14,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="style.css" rel="stylesheet">
+    <style>
+        .status-dropdown {
+            color: white;
+            font-weight: 500;
+            border-radius: 0.375rem; /* Menyesuaikan dengan radius badge */
+        }
+        .status-dropdown.text-dark {
+            color: black !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -100,21 +110,41 @@
                                     <tr>
                                         <td>28 Jan 2026</td>
                                         <td class="fw-bold">Ibu Rina</td>
-                                        <td><span class="badge bg-primary">Ebook</span></td>
-                                        <td><span class="badge bg-secondary">Baru Masuk</span></td>
+                                        <td><span class="badge bg-primary fw-normal">Ebook</span></td>
+                                        <td>
+                                            <select class="form-select form-select-sm status-dropdown" onchange="updateStatusColor(this)">
+                                                <option selected>Baru Masuk</option>
+                                                <option>Sudah masuk grup</option>
+                                                <option>Followup</option>
+                                                <option>Bersedia hadir</option>
+                                                <option>Hadir</option>
+                                                <option>Minat Daftar</option>
+                                                <option>Daftar</option>
+                                            </select>
+                                        </td>
                                         <td><button class="btn btn-sm btn-success" onclick="openFollowUp('Ibu Rina')"><i class="fab fa-whatsapp"></i> Follow Up</button></td>
                                     </tr>
                                     <tr>
                                         <td>27 Jan 2026</td>
                                         <td class="fw-bold">Pak Budi</td>
-                                        <td><span class="badge bg-warning text-dark">Tes Hafidz</span></td>
-                                        <td><span class="badge bg-info text-dark">Sedang Follow Up</span></td>
+                                        <td><span class="badge bg-warning text-dark fw-normal">Tes Hafidz</span></td>
+                                        <td>
+                                            <select class="form-select form-select-sm status-dropdown" onchange="updateStatusColor(this)">
+                                                <option>Baru Masuk</option>
+                                                <option>Sudah masuk grup</option>
+                                                <option selected>Followup</option>
+                                                <option>Bersedia hadir</option>
+                                                <option>Hadir</option>
+                                                <option>Minat Daftar</option>
+                                                <option>Daftar</option>
+                                            </select>
+                                        </td>
                                         <td><button class="btn btn-sm btn-success" onclick="openFollowUp('Pak Budi')"><i class="fab fa-whatsapp"></i> Follow Up</button></td>
                                     </tr>
                                     <tr>
                                         <td>25 Jan 2026</td>
                                         <td class="fw-bold">Keluarga Pak Andi</td>
-                                        <td><span class="badge bg-primary">Ebook</span></td>
+                                        <td><span class="badge bg-primary fw-normal">Ebook</span></td>
                                         <td><span class="badge bg-success">Closing (Lunas)</span></td>
                                         <td><button class="btn btn-sm btn-secondary" disabled>Selesai</button></td>
                                     </tr>
@@ -184,7 +214,7 @@
         }
 
         const templates = {
-            invite: "{SALAM} {NAMA}. {Terima kasih|Makasih} sudah {download|unduh} Ebook/Ikut Tes kemarin ya. 😊 {Sekadar info|Mau infoin}, kami ada *{EVENT_NAME}* pada {EVENT_DATE}. {Materinya bagus banget|Isinya daging banget} buat melengkapi Ebook kemarin. {Mau saya kirimkan infonya?|Boleh saya share detailnya?}",
+            invite: "{SALAM} {NAMA}. {Terima kasih|Makasih} sudah {download|unduh} Ebook/Ikut Tes kemarin ya. 😊 {Sekadar info|Mau infoin}, kami ada *{EVENT_NAME}* pada {EVENT_DATE} pukul {EVENT_TIME}. {Materinya bagus banget|Isinya daging banget} buat melengkapi Ebook kemarin. {Mau saya kirimkan infonya?|Boleh saya share detailnya?}",
             reminder: "{SALAM} {NAMA}. {Mengingatkan|Cuma mau ingetin} {EVENT_DATE} jam {EVENT_TIME} kita ada {EVENT_NAME} ya. {Pastikan alarmnya dipasang|Jangan lupa pasang alarm} biar nggak ketinggalan {materi dagingnya|ilmu mahal ini}! ⏰",
             link: "{SALAM} {NAMA}. {Acaranya sebentar lagi mulai ya!|Acara segera dimulai!} 🚀 Ini link aksesnya: {EVENT_LINK}. {Ditunggu kehadirannya|Sampai jumpa di lokasi} ya {Bun/Pak|Ayah/Bunda}!"
         };
@@ -235,6 +265,29 @@
             
             window.open(waUrl, '_blank');
         }
+
+        function updateStatusColor(selectElement) {
+            // Hapus semua kelas warna yang mungkin ada
+            selectElement.classList.remove('bg-secondary', 'bg-info', 'bg-warning', 'bg-success', 'text-dark');
+
+            const value = selectElement.value;
+            if (value === 'Baru Masuk') {
+                selectElement.classList.add('bg-secondary');
+            } else if (value === 'Sudah masuk grup' || value === 'Followup') {
+                selectElement.classList.add('bg-info', 'text-dark');
+            } else if (value === 'Bersedia hadir' || value === 'Hadir') {
+                selectElement.classList.add('bg-warning', 'text-dark');
+            } else if (value === 'Minat Daftar' || value === 'Daftar') {
+                selectElement.classList.add('bg-success');
+            }
+        }
+
+        // Panggil saat halaman dimuat untuk memberi warna awal pada dropdown
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.status-dropdown').forEach(function(dropdown) {
+                updateStatusColor(dropdown);
+            });
+        });
     </script>
 </body>
 </html>
