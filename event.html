@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Event - PSB Villa Quran Baron</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                <img src="https://srv1981-files.hstgr.io/9cfcf09b529fd104/files/public_html/sadigs/assets/img/logo.png" 
+                     alt="Logo Sadigs" 
+                     style="max-width: 80%; height: auto; margin-bottom: 10px;"
+                     onerror="this.style.display='none'; this.parentElement.innerText='VILLA QURAN BARON'">
+            </div>
+            <div class="list-group list-group-flush mt-3">
+                <a href="index.html" class="list-group-item list-group-item-action">
+                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                </a>
+                <a href="funnel.html" class="list-group-item list-group-item-action">
+                    <i class="fas fa-chart-pie me-2"></i> Target Funnel
+                </a>
+                <a href="pipeline.html" class="list-group-item list-group-item-action">
+                    <i class="fas fa-filter me-2"></i> Pipeline Santri
+                </a>
+                <a href="event.html" class="list-group-item list-group-item-action active">
+                    <i class="fas fa-calendar-alt me-2"></i> Manajemen Event
+                </a>
+                <a href="mitra.html" class="list-group-item list-group-item-action">
+                    <i class="fas fa-users me-2"></i> Data Mitra
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-money-bill-wave me-2"></i> Keuangan
+                </a>
+                <div class="border-top my-3 border-secondary"></div>
+                <div class="sidebar-heading small text-uppercase" style="padding: 0.75rem 1.25rem; font-size: 0.7rem; color: rgba(255,255,255,0.5);">Alat Marketing</div>
+                <a href="landing-ebook.html" target="_blank" class="list-group-item list-group-item-action">
+                    <i class="fas fa-book me-2"></i> Preview LP Ebook
+                </a>
+                <a href="landing-test.html" target="_blank" class="list-group-item list-group-item-action">
+                    <i class="fas fa-vial me-2"></i> Preview LP Tes
+                </a>
+                <div class="border-top my-3 border-secondary"></div>
+                <a href="target.html" class="list-group-item list-group-item-action text-warning">
+                    <i class="fas fa-bullseye me-2"></i> Setting Target
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                </a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-custom-main" id="menu-toggle"><i class="fas fa-bars"></i></button>
+                    <div class="ms-auto fw-bold">Manajemen Event</div>
+                </div>
+            </nav>
+
+            <div class="container-fluid px-4 py-4">
+                
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="fw-bold text-secondary">Jadwal Acara Terdekat</h4>
+                </div>
+
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="alert alert-info small mb-4">
+                            <i class="fas fa-info-circle me-2"></i> Data yang Anda isi di sini akan otomatis muncul di <strong>Generator Pesan Mitra</strong>.
+                        </div>
+
+                        <form id="eventForm">
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold text-secondary">Nama Acara</label>
+                                <input type="text" id="eventName" class="form-control" placeholder="Contoh: Zoominar Parenting Gratis" value="Zoominar Parenting Gratis">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label small fw-bold text-secondary">Hari & Tanggal</label>
+                                    <input type="text" id="eventDate" class="form-control" placeholder="Contoh: Sabtu, 20 Mei 2026" value="Sabtu Besok">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label small fw-bold text-secondary">Jam Pelaksanaan</label>
+                                    <input type="text" id="eventTime" class="form-control" placeholder="Contoh: 09.00 WIB" value="09.00 WIB">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label small fw-bold text-secondary">Link Akses (Zoom/Lokasi)</label>
+                                <input type="text" id="eventLink" class="form-control" placeholder="Contoh: bit.ly/ZoomParenting" value="bit.ly/ZoomParentingBaron">
+                            </div>
+                            
+                            <div class="text-end">
+                                <button type="button" onclick="saveEvent()" class="btn btn-custom-main px-4"><i class="fas fa-save me-2"></i> Simpan Jadwal</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load data saat halaman dibuka
+        document.addEventListener('DOMContentLoaded', function() {
+            const data = JSON.parse(localStorage.getItem('eventData')) || {};
+            if(data.name) document.getElementById('eventName').value = data.name;
+            if(data.date) document.getElementById('eventDate').value = data.date;
+            if(data.time) document.getElementById('eventTime').value = data.time;
+            if(data.link) document.getElementById('eventLink').value = data.link;
+        });
+
+        function saveEvent() {
+            const data = {
+                name: document.getElementById('eventName').value,
+                date: document.getElementById('eventDate').value,
+                time: document.getElementById('eventTime').value,
+                link: document.getElementById('eventLink').value
+            };
+            localStorage.setItem('eventData', JSON.stringify(data));
+            alert('Jadwal berhasil disimpan! Pesan di Mitra Area otomatis terupdate.');
+        }
+    </script>
+</body>
+</html>

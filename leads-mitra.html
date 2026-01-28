@@ -175,10 +175,18 @@
             return "Selamat Malam";
         }
 
+        // Fungsi Spintax untuk variasi pesan (Anti-Banned WA)
+        function spinText(text) {
+            return text.replace(/\{([^{}]+)\}/g, function(match, content) {
+                const choices = content.split('|');
+                return choices[Math.floor(Math.random() * choices.length)];
+            });
+        }
+
         const templates = {
-            invite: "{SALAM} {NAMA}. Terima kasih sudah download Ebook/Ikut Tes kemarin ya. 😊 Sekadar info, kami ada *Zoominar Parenting Gratis* minggu ini. Materinya bagus banget buat melengkapi Ebook kemarin. Mau saya kirimkan infonya?",
-            reminder: "{SALAM} {NAMA}. Mengingatkan besok pagi jam 09.00 WIB kita ada Zoominar Parenting ya. Pastikan alarmnya dipasang biar nggak ketinggalan materi dagingnya! ⏰",
-            link: "{SALAM} {NAMA}. Acaranya sebentar lagi mulai ya! 🚀 Ini link Zoom-nya: bit.ly/ZoomParentingBaron. Ditunggu kehadirannya ya Bun/Pak!"
+            invite: "{SALAM} {NAMA}. {Terima kasih|Makasih} sudah {download|unduh} Ebook/Ikut Tes kemarin ya. 😊 {Sekadar info|Mau infoin}, kami ada *{EVENT_NAME}* pada {EVENT_DATE}. {Materinya bagus banget|Isinya daging banget} buat melengkapi Ebook kemarin. {Mau saya kirimkan infonya?|Boleh saya share detailnya?}",
+            reminder: "{SALAM} {NAMA}. {Mengingatkan|Cuma mau ingetin} {EVENT_DATE} jam {EVENT_TIME} kita ada {EVENT_NAME} ya. {Pastikan alarmnya dipasang|Jangan lupa pasang alarm} biar nggak ketinggalan {materi dagingnya|ilmu mahal ini}! ⏰",
+            link: "{SALAM} {NAMA}. {Acaranya sebentar lagi mulai ya!|Acara segera dimulai!} 🚀 Ini link aksesnya: {EVENT_LINK}. {Ditunggu kehadirannya|Sampai jumpa di lokasi} ya {Bun/Pak|Ayah/Bunda}!"
         };
 
         function openFollowUp(name) {
@@ -192,12 +200,23 @@
         }
 
         function generateFollowUp() {
+            // Ambil data event dari LocalStorage (Settingan Admin)
+            const eventData = JSON.parse(localStorage.getItem('eventData')) || {
+                name: 'Zoominar Parenting',
+                date: 'Sabtu Besok',
+                time: '09.00 WIB',
+                link: 'bit.ly/ZoomParentingBaron'
+            };
+
             const angle = document.getElementById('followUpAngle').value;
             const greeting = getGreeting();
             
             let template = templates[angle];
-            let message = template.replace("{SALAM}", greeting).replace("{NAMA}", currentProspek);
-            
+            let message = template.replace("{SALAM}", greeting).replace("{NAMA}", currentProspek)
+                                  .replace(/{EVENT_NAME}/g, eventData.name).replace(/{EVENT_DATE}/g, eventData.date)
+                                  .replace(/{EVENT_TIME}/g, eventData.time).replace(/{EVENT_LINK}/g, eventData.link);
+            message = spinText(message); // Acak kata-kata
+
             document.getElementById('followUpMsg').value = message;
         }
 

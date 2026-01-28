@@ -142,6 +142,47 @@
                     </div>
                 </div>
 
+                <!-- Campaign 3: Undangan Event (Dinamis dari Admin) -->
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <!-- Kolom Kiri -->
+                            <div class="col-md-7 mb-3 mb-md-0">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-light rounded p-3 text-danger me-3">
+                                        <i class="fas fa-calendar-alt fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="fw-bold mb-1">Undangan Event / Open House</h5>
+                                        <p class="text-muted small mb-0">Ajak kenalan hadir ke acara sekolah. Jadwal otomatis ikut settingan Admin.</p>
+                                    </div>
+                                </div>
+
+                                <label class="small fw-bold text-secondary mb-1">Link Event</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control" id="linkEvent" value="Loading..." readonly>
+                                    <button class="btn btn-outline-secondary" onclick="copyToClipboard('linkEvent')"><i class="fas fa-copy"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Kolom Kanan -->
+                            <div class="col-md-5 border-start">
+                                <h6 class="fw-bold text-secondary small mb-2"><i class="fas fa-magic me-1"></i> Generator Pesan Otomatis</h6>
+                                <select class="form-select form-select-sm mb-2" id="angleEvent" onchange="generateMessage('event')">
+                                    <option value="soft">Soft Selling (Tanya Kabar + Info)</option>
+                                    <option value="medium">Medium Selling (Manfaat Acara)</option>
+                                    <option value="hard">Hard Selling (To The Point)</option>
+                                </select>
+                                <textarea class="form-control form-control-sm mb-2 text-muted bg-light" id="msgEvent" rows="5" style="font-size: 0.8rem;" readonly></textarea>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-success btn-sm flex-grow-1" onclick="shareToWA('event')"><i class="fab fa-whatsapp me-1"></i> Share WA</button>
+                                    <button class="btn btn-outline-secondary btn-sm" onclick="copyMsg('event')"><i class="fas fa-copy"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -158,32 +199,71 @@
             return "Selamat Malam";
         }
 
+        // Fungsi Spintax untuk variasi pesan (Anti-Banned WA)
+        function spinText(text) {
+            return text.replace(/\{([^{}]+)\}/g, function(match, content) {
+                const choices = content.split('|');
+                return choices[Math.floor(Math.random() * choices.length)];
+            });
+        }
+
         const templates = {
             ebook: {
-                soft: "{SALAM} Bunda, ngerasa gak sih anak jaman sekarang susah banget lepas dari HP? 😢 Kadang khawatir ya dampaknya ke otak mereka. Kebetulan saya nemu Ebook bagus nih tentang 'Mendidik Anak Era Digital'. Isinya daging banget dan GRATIS. Coba download di sini ya: {LINK}",
-                medium: "{SALAM} teman-teman. Sharing info bermanfaat. Buat yang punya anak usia SD/SMP, Villa Quran Baron lagi bagi-bagi panduan gratis cara memfilter konten negatif di internet. Bagus buat nambah wawasan kita sebagai ortu. Silakan ambil disini: {LINK}",
-                hard: "Ebook Parenting Gratis! 📚 Cara jitu atasi kecanduan gadget pada anak. Download sekarang sebelum link ditutup: {LINK}"
+                soft: "{SALAM} Bunda, {ngerasa gak sih|pernah ngerasa gak} anak jaman sekarang {susah banget|sulit banget} lepas dari HP? 😢 {Kadang khawatir ya|Jujur ngeri ya} dampaknya ke otak mereka. {Kebetulan|Pas banget} saya nemu Ebook bagus nih tentang 'Mendidik Anak Era Digital'. {Isinya daging banget|Isinya sangat bermanfaat} dan GRATIS. {Coba download di sini ya|Silakan unduh di sini}: {LINK}",
+                medium: "{SALAM} teman-teman. {Sharing info bermanfaat|Izin berbagi info penting}. Buat yang punya anak usia SD/SMP, Villa Quran Baron lagi {bagi-bagi|share} panduan gratis cara {memfilter|menyaring} konten negatif di internet. {Bagus buat nambah wawasan|Sangat recommended buat} kita sebagai ortu. {Silakan ambil disini|Download gratis disini}: {LINK}",
+                hard: "Ebook Parenting Gratis! 📚 {Cara jitu|Solusi ampuh} atasi kecanduan gadget pada anak. {Download sekarang|Ambil promonya} sebelum link ditutup: {LINK}"
             },
             test: {
-                soft: "{SALAM} Ayah Bunda, penasaran gak sih apakah Ananda punya bakat jadi Hafidz Quran? 🕌 Kadang kita bingung mulai dari mana. Nah, ada Tes Online Gratis nih buat ngecek potensinya. Cuma 5 menit kok. Yuk coba tes di sini: {LINK}",
-                medium: "{SALAM}. Info menarik buat orang tua. Villa Quran Baron menyediakan alat tes potensi Hafidz secara online. Hasilnya bisa jadi gambaran buat kita mengarahkan pendidikan anak. Gratis lho. Cek disini: {LINK}",
-                hard: "Tes Potensi Hafidz GRATIS! 🌟 Ketahui peluang anak Anda menjadi penghafal Quran sejak dini. Hasil langsung keluar via WA. Klik link ini: {LINK}"
+                soft: "{SALAM} Ayah Bunda, {penasaran gak sih|ingin tahu gak} apakah Ananda punya {bakat|potensi} jadi Hafidz Quran? 🕌 {Kadang kita bingung|Seringkali kita bingung} mulai dari mana. Nah, ada Tes Online Gratis nih buat {ngecek|mengukur} potensinya. {Cuma 5 menit kok|Hanya butuh 5 menit}. {Yuk coba tes di sini|Cek sekarang di}: {LINK}",
+                medium: "{SALAM}. {Info menarik|Kabar gembira} buat orang tua. Villa Quran Baron menyediakan {alat tes|tools} potensi Hafidz secara online. {Hasilnya|Outputnya} bisa jadi gambaran buat kita mengarahkan pendidikan anak. Gratis lho. {Cek disini|Coba di link ini}: {LINK}",
+                hard: "Tes Potensi Hafidz GRATIS! 🌟 {Ketahui|Cek} peluang anak Anda menjadi penghafal Quran sejak dini. {Hasil langsung keluar|Laporan dikirim} via WA. {Klik link ini|Akses di sini}: {LINK}"
+            }
+            ,event: {
+                soft: "{SALAM} {Ayah/Bunda|Teman-teman}. {Apa kabar?|Semoga sehat selalu ya.} {Sekadar info|Mau ngabarin}, Villa Quran Baron mau ngadain *{EVENT_NAME}* nih pada {EVENT_DATE}. {Temanya bagus banget|Materinya penting banget} buat kita. {Kalau sempat hadir ya|Yuk ramaikan}, gratis kok. Info lengkap: {LINK}",
+                medium: "{SALAM}. {Mengingatkan|Info update} jadwal acara sekolah. Kita ada {EVENT_NAME} di {EVENT_DATE} jam {EVENT_TIME}. {Pastikan hadir ya|Jangan sampai terlewat}, karena kuota terbatas. {Daftar di sini|Cek detailnya}: {LINK}",
+                hard: "Undangan Terbuka! 📢 {Hadirilah|Ikutilah} {EVENT_NAME}. 🗓️ {EVENT_DATE} ⏰ {EVENT_TIME}. {Acara Gratis|Free Entry} untuk umum. {Amankan kursi Anda|Registrasi sekarang}: {LINK}"
             }
         };
 
         function generateMessage(type) {
-            const angle = document.getElementById(type === 'ebook' ? 'angleEbook' : 'angleTest').value;
-            const linkInput = document.getElementById(type === 'ebook' ? 'linkEbook' : 'linkTest').value;
-            const fullLink = "https://" + linkInput; // Pastikan ada protokol agar bisa diklik
+            const angle = document.getElementById(type === 'ebook' ? 'angleEbook' : (type === 'test' ? 'angleTest' : 'angleEvent')).value;
+            let linkInput = document.getElementById(type === 'ebook' ? 'linkEbook' : (type === 'test' ? 'linkTest' : 'linkEvent')).value;
+            
+            // Jika link tidak dimulai dengan http, tambahkan https://
+            if (!linkInput.startsWith('http')) {
+                linkInput = "https://" + linkInput;
+            }
+            
             const greeting = getGreeting();
+
+            // Ambil data event dari LocalStorage (Settingan Admin)
+            const eventData = JSON.parse(localStorage.getItem('eventData')) || {
+                name: 'Zoominar Parenting',
+                date: 'Sabtu Besok',
+                time: '09.00 WIB',
+                link: 'bit.ly/ZoomParentingBaron'
+            };
 
             let template = templates[type][angle];
             
             // Replace placeholder
-            let message = template.replace("{SALAM}", greeting).replace("{LINK}", fullLink);
+            let message = template.replace("{SALAM}", greeting).replace("{LINK}", linkInput);
+            
+            // Replace Event Placeholders (jika ada)
+            if (type === 'event') {
+                message = message.replace(/{EVENT_NAME}/g, eventData.name)
+                                 .replace(/{EVENT_DATE}/g, eventData.date)
+                                 .replace(/{EVENT_TIME}/g, eventData.time);
+            }
+
+            message = spinText(message); // Acak kata-kata
             
             // Set ke textarea
-            document.getElementById(type === 'ebook' ? 'msgEbook' : 'msgTest').value = message;
+            let targetId = 'msgEbook';
+            if (type === 'test') targetId = 'msgTest';
+            if (type === 'event') targetId = 'msgEvent';
+            
+            document.getElementById(targetId).value = message;
         }
 
         // --- FUNGSI UTILITY ---
@@ -197,7 +277,11 @@
         }
 
         function copyMsg(type) {
-            var msgText = document.getElementById(type === 'ebook' ? 'msgEbook' : 'msgTest');
+            let targetId = 'msgEbook';
+            if (type === 'test') targetId = 'msgTest';
+            if (type === 'event') targetId = 'msgEvent';
+
+            var msgText = document.getElementById(targetId);
             msgText.select();
             msgText.setSelectionRange(0, 99999);
             navigator.clipboard.writeText(msgText.value);
@@ -205,10 +289,14 @@
         }
 
         function shareToWA(type) {
-            var msgText = document.getElementById(type === 'ebook' ? 'msgEbook' : 'msgTest').value;
+            let targetId = 'msgEbook';
+            if (type === 'test') targetId = 'msgTest';
+            if (type === 'event') targetId = 'msgEvent';
+
+            var msgText = document.getElementById(targetId).value;
             if (!msgText) {
                 generateMessage(type); // Generate dulu kalau kosong
-                msgText = document.getElementById(type === 'ebook' ? 'msgEbook' : 'msgTest').value;
+                msgText = document.getElementById(targetId).value;
             }
             
             // Encode pesan untuk URL
@@ -225,6 +313,16 @@
         window.onload = function() {
             generateMessage('ebook');
             generateMessage('test');
+            
+            // Load Event Data untuk Link
+            const eventData = JSON.parse(localStorage.getItem('eventData')) || {
+                name: 'Zoominar Parenting',
+                date: 'Sabtu Besok',
+                time: '09.00 WIB',
+                link: 'bit.ly/ZoomParentingBaron'
+            };
+            document.getElementById('linkEvent').value = eventData.link;
+            generateMessage('event');
         };
     </script>
 </body>
